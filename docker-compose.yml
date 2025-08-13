@@ -1,0 +1,16 @@
+version: "3.9"
+
+services:
+  docker-garbage-collector:
+    build: .
+    container_name: docker-garbage-collector
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      - TZ=Europe/Berlin
+      - CRON_SCHEDULE=0 3 * * *   # daily 03:00
+      - PRUNE_MODE=safe           # safe | aggressive
+      - DRY_RUN=false             # true = no delete, just preview
+      - AGE_DAYS=7                # delete only older than X days
+      # - KEEP_LABELS=keep,base
+    restart: unless-stopped
