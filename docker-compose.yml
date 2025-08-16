@@ -1,10 +1,11 @@
 version: "3.9"
 
 services:
-  docker-garbage-collector:
+  garbage-collector:
     build: .
-    container_name: docker-garbage-collector
-    image: docker-garbage-collector:latest
+    container_name: garbage-collector
+    image: garbage-collector:latest
+    network_mode: none
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     environment:
